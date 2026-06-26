@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TrustGuard AI — Fake News & Scam Detector</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">🛡️</span>
+        <span class="logo-text">TrustGuard <span class="logo-ai">AI</span></span>
+      </div>
+      <p class="tagline">Detect Scams · Fake News · Phishing Links</p>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="main">
+    <!-- Tab Navigation -->
+    <div class="tabs">
+      <button class="tab active" data-tab="text">📝 Analyze Text</button>
+      <button class="tab" data-tab="url">🔗 Check URL</button>
+      <button class="tab" data-tab="screenshot">📷 Screenshot OCR</button>
+    </div>
+
+    <!-- Text Analysis Tab -->
+    <section class="tab-content active" id="tab-text">
+      <div class="card input-card">
+        <h2 class="card-title">Paste your message, SMS, email or news article</h2>
+        <textarea
+          id="text-input"
+          class="text-area"
+          rows="7"
+          placeholder="e.g. Congratulations! You have won ₹25,00,000. Click here to claim immediately..."
+        ></textarea>
+        <div class="input-footer">
+          <span id="char-count" class="char-count">0 / 10,000</span>
+          <button id="analyze-btn" class="btn btn-primary" onclick="analyzeText()">
+            🔍 Analyze Now
+          </button>
+        </div>
+        <div class="example-btns">
+          <span class="example-label">Try examples:</span>
+          <button class="btn btn-ghost" onclick="loadExample('scam')">Scam SMS</button>
+          <button class="btn btn-ghost" onclick="loadExample('phishing')">Phishing Email</button>
+          <button class="btn btn-ghost" onclick="loadExample('fakenews')">Fake News</button>
+          <button class="btn btn-ghost" onclick="loadExample('job')">Job Scam</button>
+          <button class="btn btn-ghost" onclick="loadExample('safe')">Safe Message</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- URL Check Tab -->
+    <section class="tab-content" id="tab-url">
+      <div class="card input-card">
+        <h2 class="card-title">Check a URL for phishing / scam risk</h2>
+        <input
+          type="text"
+          id="url-input"
+          class="url-input"
+          placeholder="e.g. http://secure-bank-update.xyz/login"
+        />
+        <div class="input-footer">
+          <span></span>
+          <button class="btn btn-primary" onclick="checkURL()">🔗 Check URL</button>
+        </div>
+        <div class="example-btns">
+          <span class="example-label">Try examples:</span>
+          <button class="btn btn-ghost" onclick="loadURLExample('safe')">Safe URL</button>
+          <button class="btn btn-ghost" onclick="loadURLExample('phish')">Phishing URL</button>
+          <button class="btn btn-ghost" onclick="loadURLExample('ip')">IP URL</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Screenshot Tab -->
+    <section class="tab-content" id="tab-screenshot">
+      <div class="card input-card">
+        <h2 class="card-title">Upload WhatsApp / SMS screenshot</h2>
+        <div class="upload-zone" id="upload-zone" ondrop="handleDrop(event)" ondragover="event.preventDefault()">
+          <div class="upload-icon">📤</div>
+          <p>Drag & drop an image here, or</p>
+          <label class="btn btn-primary" for="file-input">Browse Image</label>
+          <input type="file" id="file-input" accept="image/*" onchange="handleFileSelect(event)" hidden />
+          <p class="upload-hint">Supports: JPG, PNG, WebP · Max 10 MB</p>
+        </div>
+        <div id="image-preview-container" class="image-preview-container" style="display:none;">
+          <img id="image-preview" class="image-preview" alt="Preview" />
+          <button class="btn btn-ghost remove-btn" onclick="removeImage()">✕ Remove</button>
+        </div>
+        <div class="input-footer" id="upload-footer" style="display:none;">
+          <span></span>
+          <button class="btn btn-primary" onclick="analyzeScreenshot()">🔍 Analyze Screenshot</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Loading Spinner -->
+    <div id="loading" class="loading hidden">
+      <div class="spinner"></div>
+      <p>Analyzing with TrustGuard AI...</p>
+    </div>
+
+    <!-- Results Section -->
+    <section id="results" class="results hidden">
+      <!-- Risk Banner -->
+      <div id="risk-banner" class="risk-banner">
+        <div class="risk-icon" id="risk-icon">⚠️</div>
+        <div class="risk-info">
+          <h3 id="risk-title">Risk Level</h3>
+          <p id="risk-subtitle"></p>
+        </div>
+        <div class="risk-badge" id="risk-badge">HIGH</div>
+      </div>
+
+      <!-- Probability Cards -->
+      <div class="prob-grid">
+        <div class="prob-card" id="scam-card">
+          <div class="prob-label">🚨 Scam Probability</div>
+          <div class="prob-value" id="scam-prob">—</div>
+          <div class="prob-bar-wrap">
+            <div class="prob-bar" id="scam-bar"></div>
+          </div>
+          <div class="prob-tag" id="scam-label">—</div>
+        </div>
+        <div class="prob-card" id="news-card">
+          <div class="prob-label">📰 Fake News Probability</div>
+          <div class="prob-value" id="news-prob">—</div>
+          <div class="prob-bar-wrap">
+            <div class="prob-bar" id="news-bar"></div>
+          </div>
+          <div class="prob-tag" id="news-label">—</div>
+        </div>
+        <div class="prob-card">
+          <div class="prob-label">🎯 Overall Confidence</div>
+          <div class="prob-value" id="confidence-val">—</div>
+          <div class="prob-bar-wrap">
+            <div class="prob-bar" id="confidence-bar"></div>
+          </div>
+          <div class="prob-tag" id="lang-tag">—</div>
+        </div>
+      </div>
+
+      <!-- Reasons -->
+      <div class="card detail-card">
+        <h3 class="card-title">🔍 Why is this suspicious?</h3>
+        <ul id="reasons-list" class="reasons-list"></ul>
+      </div>
+
+      <!-- Suspicious Keywords -->
+      <div class="card detail-card" id="keywords-card">
+        <h3 class="card-title">🏷️ Suspicious Keywords Detected</h3>
+        <div id="keywords-container" class="keywords-container"></div>
+      </div>
+
+      <!-- URL Risks -->
+      <div class="card detail-card" id="url-risks-card" style="display:none;">
+        <h3 class="card-title">🔗 URL Risk Analysis</h3>
+        <div id="url-risks-container"></div>
+      </div>
+
+      <!-- Translated Text -->
+      <div class="card detail-card" id="translation-card" style="display:none;">
+        <h3 class="card-title">🌐 Translated Text (for analysis)</h3>
+        <p id="translated-text" class="translated-text"></p>
+      </div>
+
+      <!-- Recommended Action -->
+      <div class="card action-card" id="action-card">
+        <h3 class="card-title">✅ Recommended Action</h3>
+        <p id="recommended-action"></p>
+      </div>
+
+      <!-- Analyze Again -->
+      <div class="center-btn">
+        <button class="btn btn-outline" onclick="resetForm()">🔄 Analyze Another</button>
+      </div>
+    </section>
+
+    <!-- URL Result -->
+    <section id="url-result" class="results hidden">
+      <div id="url-risk-banner" class="risk-banner"></div>
+      <div class="card detail-card">
+        <h3 class="card-title">🔗 URL Risk Details</h3>
+        <div id="single-url-details"></div>
+      </div>
+      <div class="center-btn">
+        <button class="btn btn-outline" onclick="resetURL()">🔄 Check Another URL</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>TrustGuard AI · Protecting India from Digital Fraud</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

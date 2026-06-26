@@ -1,0 +1,407 @@
+/* ============================================================
+   TrustGuard AI — Main Stylesheet
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0f1117;
+  --bg2: #161b27;
+  --card: #1c2233;
+  --border: #2a3347;
+  --text: #e8ecf4;
+  --text-muted: #8b97b0;
+  --primary: #4f8ef7;
+  --primary-dark: #3a72d8;
+  --high: #ef4444;
+  --high-bg: rgba(239,68,68,0.12);
+  --medium: #f59e0b;
+  --medium-bg: rgba(245,158,11,0.12);
+  --low: #22c55e;
+  --low-bg: rgba(34,197,94,0.12);
+  --radius: 12px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* ---- Header ---- */
+.header {
+  background: linear-gradient(135deg, #1a2035 0%, #0d1520 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 1.5rem 1rem;
+}
+.header-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  text-align: center;
+}
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+.logo-icon { font-size: 2rem; }
+.logo-ai { color: var(--primary); }
+.tagline { color: var(--text-muted); font-size: 0.95rem; margin-top: 0.3rem; }
+
+/* ---- Main ---- */
+.main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+}
+
+/* ---- Tabs ---- */
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  background: var(--bg2);
+  padding: 0.4rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+.tab {
+  flex: 1;
+  padding: 0.6rem 0.5rem;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.2s;
+}
+.tab:hover { color: var(--text); background: var(--card); }
+.tab.active { background: var(--primary); color: #fff; font-weight: 600; }
+
+/* ---- Tab Content ---- */
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* ---- Cards ---- */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 1.2rem;
+  box-shadow: var(--shadow);
+}
+.card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+.input-card { margin-bottom: 0; }
+
+/* ---- Textarea ---- */
+.text-area {
+  width: 100%;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  padding: 1rem;
+  resize: vertical;
+  transition: border-color 0.2s;
+  outline: none;
+}
+.text-area:focus { border-color: var(--primary); }
+.text-area::placeholder { color: var(--text-muted); }
+
+/* ---- URL Input ---- */
+.url-input {
+  width: 100%;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  padding: 0.8rem 1rem;
+  outline: none;
+  margin-bottom: 1rem;
+  transition: border-color 0.2s;
+}
+.url-input:focus { border-color: var(--primary); }
+.url-input::placeholder { color: var(--text-muted); }
+
+/* ---- Input Footer ---- */
+.input-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.8rem;
+}
+.char-count { font-size: 0.8rem; color: var(--text-muted); }
+
+/* ---- Buttons ---- */
+.btn {
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
+.btn-ghost {
+  background: var(--bg2);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  font-size: 0.8rem;
+  padding: 0.4rem 0.8rem;
+}
+.btn-ghost:hover { color: var(--text); border-color: var(--primary); }
+.btn-outline {
+  background: transparent;
+  color: var(--primary);
+  border: 1.5px solid var(--primary);
+}
+.btn-outline:hover { background: rgba(79,142,247,0.1); }
+
+/* ---- Example Buttons ---- */
+.example-btns {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.example-label { font-size: 0.8rem; color: var(--text-muted); margin-right: 0.3rem; }
+
+/* ---- Upload Zone ---- */
+.upload-zone {
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 2.5rem 1rem;
+  text-align: center;
+  transition: border-color 0.2s;
+  cursor: pointer;
+}
+.upload-zone:hover { border-color: var(--primary); }
+.upload-zone.drag-over { border-color: var(--primary); background: rgba(79,142,247,0.05); }
+.upload-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+.upload-hint { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem; }
+
+.image-preview-container {
+  margin-top: 1rem;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+.image-preview {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  display: block;
+  margin: 0 auto;
+}
+.remove-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+}
+
+/* ---- Loading ---- */
+.loading {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--text-muted);
+}
+.loading p { margin-top: 1rem; font-size: 0.95rem; }
+.spinner {
+  width: 48px; height: 48px;
+  border: 4px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---- Risk Banner ---- */
+.risk-banner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.2rem 1.5rem;
+  border-radius: var(--radius);
+  margin-bottom: 1.2rem;
+  border: 1px solid;
+}
+.risk-banner.high { background: var(--high-bg); border-color: var(--high); }
+.risk-banner.medium { background: var(--medium-bg); border-color: var(--medium); }
+.risk-banner.low { background: var(--low-bg); border-color: var(--low); }
+.risk-icon { font-size: 2rem; }
+.risk-info { flex: 1; }
+.risk-info h3 { font-size: 1.1rem; font-weight: 700; }
+.risk-info p { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.2rem; }
+.risk-badge {
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-weight: 800;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
+.risk-banner.high .risk-badge { background: var(--high); color: #fff; }
+.risk-banner.medium .risk-badge { background: var(--medium); color: #000; }
+.risk-banner.low .risk-badge { background: var(--low); color: #000; }
+
+/* ---- Probability Grid ---- */
+.prob-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+@media (max-width: 640px) { .prob-grid { grid-template-columns: 1fr; } }
+
+.prob-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.2rem;
+  box-shadow: var(--shadow);
+}
+.prob-label { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+.prob-value { font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; }
+.prob-bar-wrap {
+  width: 100%;
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+.prob-bar {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.8s ease;
+  width: 0%;
+}
+.prob-tag {
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  display: inline-block;
+}
+.tag-danger { background: var(--high-bg); color: var(--high); }
+.tag-warning { background: var(--medium-bg); color: var(--medium); }
+.tag-safe { background: var(--low-bg); color: var(--low); }
+
+/* ---- Reasons List ---- */
+.reasons-list { list-style: none; padding: 0; }
+.reasons-list li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.92rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+.reasons-list li:last-child { border-bottom: none; }
+.reason-icon { flex-shrink: 0; }
+
+/* ---- Keywords ---- */
+.keywords-container { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.keyword-tag {
+  background: rgba(239,68,68,0.12);
+  color: #fca5a5;
+  border: 1px solid rgba(239,68,68,0.3);
+  border-radius: 4px;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+/* ---- URL Risks ---- */
+.url-risk-item {
+  background: var(--bg2);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 0.8rem;
+  border: 1px solid var(--border);
+}
+.url-risk-item:last-child { margin-bottom: 0; }
+.url-risk-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.url-text {
+  font-family: 'Courier New', monospace;
+  font-size: 0.82rem;
+  color: var(--primary);
+  word-break: break-all;
+}
+.url-score { font-size: 0.8rem; color: var(--text-muted); }
+.url-reasons { list-style: none; margin-top: 0.5rem; }
+.url-reasons li {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  padding: 0.2rem 0;
+}
+.url-reasons li::before { content: "• "; color: var(--primary); }
+
+/* ---- Translated Text ---- */
+.translated-text {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  font-style: italic;
+  line-height: 1.7;
+}
+
+/* ---- Action Card ---- */
+.action-card { border-color: var(--primary); }
+.action-card p { font-size: 0.95rem; line-height: 1.7; }
+
+/* ---- Center Button ---- */
+.center-btn { text-align: center; margin-top: 1.5rem; }
+
+/* ---- Hidden ---- */
+.hidden { display: none !important; }
+
+/* ---- Footer ---- */
+.footer {
+  text-align: center;
+  padding: 1.5rem;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  border-top: 1px solid var(--border);
+}
+
+/* ---- Risk Colors for prob values ---- */
+.color-high { color: var(--high); }
+.color-medium { color: var(--medium); }
+.color-low { color: var(--low); }
+.bar-high { background: var(--high); }
+.bar-medium { background: var(--medium); }
+.bar-low { background: var(--low); }
