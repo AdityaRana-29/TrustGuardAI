@@ -153,14 +153,6 @@ Requires GPU for reasonable training time.
 
 ---
 
-## 🏆 Hackathon Highlights
-
-- Combines **NLP + Computer Vision + OCR + Cybersecurity**
-- **Explainable AI**: Shows *why* content is risky, not just a score
-- **Indian context**: UPI fraud, KYC scams, regional language support
-- **Production-ready**: FastAPI + modular architecture
-- **Visual UI**: Dark-themed, mobile-friendly, real-time analysis
-
 ---
 
 ## 📦 Tech Stack

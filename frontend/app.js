@@ -2,7 +2,11 @@
    TrustGuard AI — Frontend JavaScript
    ============================================================ */
 
-const API_BASE = "http://localhost:8000/api/v1";
+// Auto-detect: use Render backend in production, localhost in development
+const IS_LOCAL = location.hostname === "localhost" || location.hostname === "127.0.0.1";
+const API_BASE = IS_LOCAL
+  ? "http://localhost:8000/api/v1"
+  : "https://trustguard-ai-backend.onrender.com/api/v1";
 
 // ---- Example Messages ----
 const EXAMPLES = {
