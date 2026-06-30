@@ -13,7 +13,14 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "https://trust-guard-ai.vercel.app",
+        "https://trust-guard-ai-azure.vercel.app",
+        "https://trust-guard-k0lyx9ypd-adityarana-29s-projects.vercel.app",
+        "http://localhost:3000",
+        "http://localhost:5500",
+        "http://127.0.0.1:5500",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
